@@ -1,17 +1,17 @@
-import { User, Thought} from '../models';
+const { Thought, User } = require('../models')
 
-export class thoughtController {
+module.exports = {
     /**
      * Function: getThoughts
      * Description: Retreives all thoughts on the mongoose database
      * @param {*} req 
      * @param {*} res 
      */
-    getThoughts = async(req, res) => {
+    getThoughts(req, res) {
         Thought.find({})
             .then((thoughts) => res.json(thoughts))
             .catch((err) => res.status(500).json(err))
-    }
+    },
 
     /**
      * Function: getOneThought
@@ -19,7 +19,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    getOneThought = async(req, res) => {
+    getOneThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .populate({
                 path: 'reactions',
@@ -32,7 +32,7 @@ export class thoughtController {
                     : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: createThought
@@ -40,7 +40,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    createThought = async(req, res) => {
+    createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
                 return User.findByIdAndUpdate(
@@ -57,7 +57,7 @@ export class thoughtController {
                     : res.json({ message: 'Thought successfully created!'})
                 )
                 .catch((err) => res.status(500).json(err))
-    }
+    },
 
     /**
      * Function: updateThought
@@ -65,7 +65,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    updateThought = async(req, res) => {
+    updateThought(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $set: req.body },
@@ -82,7 +82,7 @@ export class thoughtController {
                 : res.json(thought)
         )
         .catch((err) => res.status(500).json(err))
-    }
+    },
 
     /**
      * Function: deleteThought
@@ -90,7 +90,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    deleteThought = async(req, res) => {
+    deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thought) => {
                 !thought
@@ -98,7 +98,7 @@ export class thoughtController {
                     : res.json({ message: 'Thought successfully deleted!' })
             })
             .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: createReaction
@@ -106,7 +106,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    createReaction = async(req, res) => {
+    createReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $push: { reactions: req.body } },
@@ -118,7 +118,7 @@ export class thoughtController {
                     : res.json(thought)
             })
             .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: deleteReaction
@@ -126,7 +126,7 @@ export class thoughtController {
      * @param {*} req 
      * @param {*} res 
      */
-    deleteReaction = async(req,res) => {
+    deleteReaction(req,res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionId } } },

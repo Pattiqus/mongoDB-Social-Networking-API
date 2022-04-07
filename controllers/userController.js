@@ -1,13 +1,13 @@
-import { User, Thought} from '../../models';
+const { Thought, User } = require('../models')
 
-export class userController {
+module.exports = {
     /**
      * Function: getUser
      * Description: Retreives all users from the database
      * @param {*} req 
      * @param {*} res 
      */
-    getUser = async(req, res) => {
+    getUser(req, res) {
         User.find({})
             .populate({
                 path: 'thoughts',
@@ -19,7 +19,7 @@ export class userController {
             })
             .then((users) => res.json(users))
             .catch((err) => res.status(500).json(err))
-    }
+    },
 
     /**
      * Function: getOneUser
@@ -27,7 +27,7 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    getOneUser = async(req, res) => {
+    getOneUser(req, res) {
         User.findOne({ _id: req.params.userId })
         .populate({
             path: 'thoughts',
@@ -44,7 +44,7 @@ export class userController {
                 : res.json(user)
         )
         .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: createUser
@@ -52,11 +52,11 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    createUser = async(req, res) => {
+    createUser(req, res) {
         User.create(req.body)
         .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err))
-    }
+    },
 
     /**
      * Function: updateUser
@@ -64,7 +64,7 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    updateUser = async(req, res) => {
+    updateUser (req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $set: req.body },
@@ -76,7 +76,7 @@ export class userController {
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: deleteUser
@@ -84,7 +84,7 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    deleteUser = async(req, res) => {
+    deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
         .then((user) => {
             !user
@@ -94,7 +94,7 @@ export class userController {
         })
         .then(() => res.json({ message: 'User successfully deleted!' }))
         .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: addFriend
@@ -102,7 +102,7 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    addFriend = async(req, res) => {
+    addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $push: { friends: req.params.friendId } },
@@ -114,7 +114,7 @@ export class userController {
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
-    }
+    },
 
     /**
      * Function: removeFriend
@@ -122,7 +122,7 @@ export class userController {
      * @param {*} req 
      * @param {*} res 
      */
-    removeFriend = async(req, res) => {
+    removeFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: { friends: req.params.friendId } },
