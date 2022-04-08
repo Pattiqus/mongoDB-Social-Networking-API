@@ -30,8 +30,27 @@ The following dependencies are necessary to run this application:
 # Usage
 This application does not have a dedicated front end to utilize, so interaction will occur through an API client such as ```Insomnia``` or  ```Postman```.
 # Demonstration Video
-- [Click-for-Demo-Video](https://drive.google.com/file/d/1MF1w6C6k_MvuRMcKsz30bup-77MAhgJ1/view?usp=sharing)
+- [Click-for-Demo-Video](https://drive.google.com/file/d/1wFkJQ1aWtUT87dDDuE_jn3VsjojyrwME/view?usp=sharing)
 # Screenshots
+<p>Create user</p>
+
+- ![create-user](./assets/create-user.JPG)
+
+<p>Get all users</p>
+
+- ![get-all-users](./assets/get-all-users.JPG)
+
+<p>Add friend</p>
+
+- ![add-friend](./assets/add-friend.JPG)
+<p>Create thought</p>
+
+- ![create-uthought](./assets/create-thought.JPG)
+
+<p>Update thought</p>
+
+- ![update-thought](./assets/update-thought.JPG)
+
 # License
 This project is licensed under:
 - [MIT](https://opensource.org/licenses/MIT)
@@ -52,4 +71,4 @@ If you have any qestions regrading the repository or the project please contact:
 </ul>
 
 # Links
-- [GitHub Repository & Source-code](https://github.com/Pattiqus/mongoDB-Social-Networking-API)
+- [GitHub Repository](https://github.com/Pattiqus/mongoDB-Social-Networking-API)
