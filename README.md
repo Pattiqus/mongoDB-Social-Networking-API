@@ -1,4 +1,4 @@
-# E-Commerce-Platform
+# MongoDB-Social-Networking-API
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Description
 This Application is a MongoDB based API which can be utilised for a Social Network. 
